@@ -1,0 +1,40 @@
+
+#sidebar .pro-inner-list-item{
+    background-color: white;
+
+}
+
+#sidebar .pro-sidebar > .pro-sidebar-inner{
+    background-color: white;
+
+}
+#sidebar{
+    border-right: 2px solid #F0F0F0;
+    
+}
+
+#sidebar1{
+    background-color: rgb(39 38 44);
+
+}
+
+#sidebar1{
+    border-right: 2px solid #2ba55d;
+}
+
+.pro-sidebar{
+    transition: width, left, right, 0.0s;
+}
+
+.pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item > .pro-item-content {
+    font-weight: 700;
+}
+
+
+.pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item {
+    padding: 8px 35px 8px 10px;
+}
+
+.pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item > .pro-icon-wrapper{
+    margin-right: 5px;
+}
