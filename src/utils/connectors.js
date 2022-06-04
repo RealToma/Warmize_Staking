@@ -30,10 +30,10 @@ const BINANCE_MAINNET_PARAMS = {
 
 const injected = new InjectedConnector({ supportedChainIds: [chainId] });
 const binance_wallet = new InjectedConnector({
-  supportedChainIds:  [...CHAIN_IDS],
+  supportedChainIds:  [Number(BINANCE_MAINNET_PARAMS.chainId)],
 });
 const trustWallet = new InjectedConnector({
-  supportedChainIds:  [...CHAIN_IDS],
+  supportedChainIds:  [Number(BINANCE_MAINNET_PARAMS.chainId)],
 });
 
 const walletConnect = new WalletConnectConnector({

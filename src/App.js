@@ -34,8 +34,9 @@ function App() {
   const { activate, library, active } = useWeb3React();
 
   const handleConnect = async (currentConnector) => {
-    await activate(walletConnectors[currentConnector]);
+    // await activate(walletConnectors[currentConnector]);
     activate(walletConnectors[currentConnector]);
+
     window.localStorage.setItem(CURRENT_WALLET_STORAGE_NAME, currentConnector);
     // handleSwitch();
     handleClose();
@@ -60,21 +61,21 @@ function App() {
   }
 
   useEffect(() => {
-    const currentConnect = window.localStorage.getItem(CURRENT_WALLET_STORAGE_NAME);
-    if (currentConnect) {
-      if (!active) {
-        activate(walletConnectors[currentConnect]).then(() => {
-          if (parseInt(window.ethereum.chainId) !== chainId) {
-            let msg = "You are in " + chainIds[parseInt(window.ethereum.chainId)] +
-              " network. Plz switch to " + NETWORK_NAME;
-            NotificationManager.error(msg, "ERROR", 3000);
-            setConnected(false);
-            console.log(msg);
-          }
-          else setConnected(true);
-        })
-      }
-    }
+    // const currentConnect = window.localStorage.getItem(CURRENT_WALLET_STORAGE_NAME);
+    // if (currentConnect) {
+    //   if (!active) {
+    //     activate(walletConnectors[currentConnect]).then(() => {
+    //       if (parseInt(window.ethereum.chainId) !== chainId) {
+    //         let msg = "You are in " + chainIds[parseInt(window.ethereum.chainId)] +
+    //           " network. Plz switch to " + NETWORK_NAME;
+    //         NotificationManager.error(msg, "ERROR", 3000);
+    //         setConnected(false);
+    //         console.log(msg);
+    //       }
+    //       else setConnected(true);
+    //     })
+    //   }
+    // }
   }, [library, active])
 
   useEffect(() => {
@@ -83,18 +84,18 @@ function App() {
 
   return (
     <>
-        <StyledComponent>
-          <Topbar
-            current={current}
-            active={active}
-            setConnected={setConnected}
-            setCurrent={setCurrent}
-            handleConnect={handleConnect}
-            handleSwitch={handleSwitch}
-          />
-          <Content />
-          <NotificationContainer />
-        </StyledComponent>
+      <StyledComponent>
+        <Topbar
+          current={current}
+          active={active}
+          setConnected={setConnected}
+          setCurrent={setCurrent}
+          handleConnect={handleConnect}
+        // handleSwitch={handleSwitch}
+        />
+        <Content />
+        <NotificationContainer />
+      </StyledComponent>
     </>
   );
 }
