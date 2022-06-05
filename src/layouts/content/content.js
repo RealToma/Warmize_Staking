@@ -15,9 +15,10 @@ import IMG_LeftSlide01 from "../../assets/images/Frame.png";
 import IMG_LeftSlide02 from "../../assets/images/Frame (1).png";
 import IMG_Logo from "../../assets/images/logo 7.png";
 import { FaTwitter, FaTelegram, FaMediumM, FaYoutube, FaLinkedin, FaGithub, FaReddit } from "react-icons/fa";
-import {     
+import {
     TWITTER_URL, YOUTUBE_URL, REDDIT_URL, LINKEDIN_URL, GITHUB_URL, TELEGRAM_URL,
-    WARMIZ_BUY_URL, WARMIZ_DOC_URL, WARMIZ_JOIN_URL, WARMIZ_HOME_URL } from "../../utils/urls";
+    WARMIZ_BUY_URL, WARMIZ_DOC_URL, WARMIZ_JOIN_URL, WARMIZ_HOME_URL
+} from "../../utils/urls";
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import { useWeb3React } from "@web3-react/core";
 import { ethers } from 'ethers';
@@ -63,7 +64,7 @@ const Content = () => {
     const [flag_spin_withdraw, set_spin_withdraw] = useState(false);
     const [flag_spin_withdraw_index, set_spin_withdraw_index] = useState(0);
 
-    const [timeLeft ,setTimeLeft] = useState(0);
+    const [timeLeft, setTimeLeft] = useState(0);
     const [timerComponent, setTimerComponent] = useState('');
 
     function getdynamicAPR(_start, _end) {
@@ -261,7 +262,7 @@ const Content = () => {
 
     function getNowDate() {
         var today = new Date();
-        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         return date;
     }
 
@@ -271,8 +272,6 @@ const Content = () => {
         get_early_unstake_fee();
         set_duration(7);
         getcurrentAPR(7);
-        console.log("ethereum", window.ethereum);
-
         if (active === false) {
             set_user_total_stake(0);
             set_balance(0);
@@ -281,27 +280,34 @@ const Content = () => {
             set_user_pools(null);
         }
         else {
-            if (window.ethereum) {
-                if (parseInt(window.ethereum.networkVersion) === chainId) {
-                    get_user_total_stake();
-                    get_balance();
-                    get_pools();
-                    get_total_earned();
-                    get_user_withdrawable();
-                    getTotalStakers();
-                }
-            }
+            // if (window.ethereum) {
+            //     if (parseInt(window.ethereum.networkVersion) === chainId) {
+            //         get_user_total_stake();
+            //         get_balance();
+            //         get_pools();
+            //         get_total_earned();
+            //         get_user_withdrawable();
+            //         getTotalStakers();
+            //     }
+            // }
+            get_user_total_stake();
+            get_balance();
+            get_pools();
+            get_total_earned();
+            get_user_withdrawable();
+            getTotalStakers();
+
         }
     }, [active, library, account])
 
-    useEffect(() =>{
+    useEffect(() => {
         const timer = setTimeout(() => {
-          calculateTimeLeft();
+            calculateTimeLeft();
         }, 1000);
-    
+
         return () => clearTimeout(timer);
-      }, [timeLeft]);
-    
+    }, [timeLeft]);
+
     const calculateTimeLeft = () => {
         var date = new Date();
         var dateNow = new Date(date.toUTCString('en-US', {
@@ -311,13 +317,13 @@ const Content = () => {
         var dateOneDayAfter = new Date();
         dateOneDayAfter.setDate(dateNow.getDate() + 1);
         const ONE_DAY = 1000 * 60 * 60 * 24;
-        
+
         let difference = (dateOneDayAfter % ONE_DAY) * ONE_DAY - dateNow;
         setTimeLeft(difference);
         if (difference > 0) {
             const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
             const minutes = Math.floor((difference / 1000 / 60) % 60);
-            const seconds =  Math.floor((difference / 1000) % 60);
+            const seconds = Math.floor((difference / 1000) % 60);
 
             let component = hours + " : " + minutes + " : " + seconds;
             // console.log(component);
@@ -529,8 +535,7 @@ const Content = () => {
                                         console.log("plz wait for previous transaction.")
                                     }
                                     else {
-                                        if(stake_amount <= 0 || stake_amount > balance)
-                                        {
+                                        if (stake_amount <= 0 || stake_amount > balance) {
                                             NotificationManager.error("Wrong stake amount.", "Error", 3000);
                                             // set_stake_amount(0);
                                         }
@@ -645,7 +650,7 @@ const Content = () => {
                                 <Box display={"flex"} alignItems="center">
                                     <img src={IMG_Graph03} width="176px" height={"62px"} alt='' />
                                 </Box>
-                            </GraphBox01>                            
+                            </GraphBox01>
                             <Box display={"flex"}></Box>
                         </RightPart02>
                     </UpPart01>
@@ -697,10 +702,10 @@ const Content = () => {
                                                 <ElementText01 display={"flex"} flex="1">{(parseInt(pool.amount._hex) / Math.pow(10, 18)).toFixed(2)} WARMIZ</ElementText01>
                                                 {/* <ElementText01 display={"flex"} flex="1">$ {(parseInt(pool.amount._hex) / Math.pow(10, 18) * price).toFixed(2)}</ElementText01> */}
                                                 <ElementText01 display={"flex"} flex="1">
-                                                    {new Date(parseInt(pool.start._hex) * 1000).toLocaleDateString("en-US")} <br/> {new Date(parseInt(pool.start._hex) * 1000).toLocaleTimeString("en-US")}
+                                                    {new Date(parseInt(pool.start._hex) * 1000).toLocaleDateString("en-US")} <br /> {new Date(parseInt(pool.start._hex) * 1000).toLocaleTimeString("en-US")}
                                                 </ElementText01>
                                                 <ElementText01 display={"flex"} flex="1">
-                                                {new Date(parseInt(pool.end._hex) * 1000).toLocaleDateString("en-US")} <br/> {new Date(parseInt(pool.end._hex) * 1000).toLocaleTimeString("en-US")}
+                                                    {new Date(parseInt(pool.end._hex) * 1000).toLocaleDateString("en-US")} <br /> {new Date(parseInt(pool.end._hex) * 1000).toLocaleTimeString("en-US")}
                                                 </ElementText01>
                                                 <ElementText02 display={"flex"} flex="0.8">{getdynamicAPR(pool.start, pool.end)} %</ElementText02>
                                                 <ElementText02 display={"flex"} flex="0.8">
@@ -708,10 +713,9 @@ const Content = () => {
                                                         onClick={() => {
                                                             console.log("end", parseInt(pool.end._hex));
                                                             console.log("now", getNowTimeStamp());
-                                                            if(flag_spin_load)
+                                                            if (flag_spin_load)
                                                                 NotificationManager.error("Wrong staking duration.", "Error.", 3000);
-                                                            if(parseInt(pool.end._hex) * 1000 > getNowTimeStamp())
-                                                            {
+                                                            if (parseInt(pool.end._hex) * 1000 > getNowTimeStamp()) {
                                                                 set_spin_withdraw_index(index);
                                                                 set_open(true);
                                                             }
@@ -720,16 +724,16 @@ const Content = () => {
                                                                 withdraw();
                                                             }
                                                         }}
-                                                        >
+                                                    >
                                                         {flag_spin_withdraw && flag_spin_withdraw_index === index && (
                                                             <>
-                                                                <Box display={"flex"} position={"absolute"} 
+                                                                <Box display={"flex"} position={"absolute"}
                                                                     justifyContent={"center"} alignItems={"center"} marginRight={"125px"}>
                                                                     <TailSpin color="#FFFFFF" height={24} width={24} />
                                                                 </Box>
                                                             </>
                                                         )}
-                                                        <CustomBtn width={"140px"} height="43.7px" hcolor="white" hgcolor="#E27625" str="Withdraw" fsize={"16px"} fcolor={"white"} bgcolor="#E27625" border="none" fweight={"400"} ffamily={'Russo One'} lheight={"19px"} 
+                                                        <CustomBtn width={"140px"} height="43.7px" hcolor="white" hgcolor="#E27625" str="Withdraw" fsize={"16px"} fcolor={"white"} bgcolor="#E27625" border="none" fweight={"400"} ffamily={'Russo One'} lheight={"19px"}
                                                             paddingLeft={flag_spin_withdraw && flag_spin_withdraw_index === index && "20px"}
                                                         />
                                                     </Box>
@@ -751,7 +755,7 @@ const Content = () => {
                                     Be a part of the most successful all in one crypto project in the space while you earn at the same time!
                                 </Box>
                                 <Box display={"flex"} marginTop="20px"
-                                    onClick={() => {window.open(WARMIZ_JOIN_URL)}}>
+                                    onClick={() => { window.open(WARMIZ_JOIN_URL) }}>
                                     <CustomBtn width={"200px"} height="60px" hcolor="white" hgcolor="#E27625" str="JOIN NOW" fsize={"16px"} fcolor={"black"} bgcolor="#F5841F" border="none" fweight={"400"} ffamily={'Russo One'} lheight={"19px"} />
                                 </Box>
                             </Box>
@@ -769,12 +773,12 @@ const Content = () => {
                                 </Box>
                             </SocialBox>
                             <LinkGroupBox >
-                                <LinkBox onClick={() => {window.open(TWITTER_URL)}}><FaTwitter /></LinkBox>
-                                <LinkBox onClick={() => {window.open(TELEGRAM_URL)}}><FaTelegram /></LinkBox>
-                                <LinkBox onClick={() => {window.open(YOUTUBE_URL)}}><FaYoutube /></LinkBox>
-                                <LinkBox onClick={() => {window.open(LINKEDIN_URL)}}><FaLinkedin /></LinkBox>
-                                <LinkBox onClick={() => {window.open(GITHUB_URL)}}><FaGithub /></LinkBox>
-                                <LinkBox onClick={() => {window.open(REDDIT_URL)}}><FaReddit /></LinkBox>
+                                <LinkBox onClick={() => { window.open(TWITTER_URL) }}><FaTwitter /></LinkBox>
+                                <LinkBox onClick={() => { window.open(TELEGRAM_URL) }}><FaTelegram /></LinkBox>
+                                <LinkBox onClick={() => { window.open(YOUTUBE_URL) }}><FaYoutube /></LinkBox>
+                                <LinkBox onClick={() => { window.open(LINKEDIN_URL) }}><FaLinkedin /></LinkBox>
+                                <LinkBox onClick={() => { window.open(GITHUB_URL) }}><FaGithub /></LinkBox>
+                                <LinkBox onClick={() => { window.open(REDDIT_URL) }}><FaReddit /></LinkBox>
                             </LinkGroupBox>
                             <Box display={"flex"} justifyContent="center" alignItems={"center"} mt="100px" >
                                 <img src={IMG_Logo} width={"290px"} height="55px" alt='' />
