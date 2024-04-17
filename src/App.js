@@ -37,7 +37,7 @@ function App() {
     await activate(walletConnectors[currentConnector]);
     activate(walletConnectors[currentConnector]);
     window.localStorage.setItem(CURRENT_WALLET_STORAGE_NAME, currentConnector);
-    // handleSwitch();
+    handleSwitch();
     handleClose();
     setConnected(true);
   }

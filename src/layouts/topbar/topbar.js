@@ -22,7 +22,7 @@ import binance from "../../assets/images/wallet/BinanceWallet.png";
 import trust from "../../assets/images/wallet/TrustWallet.png";
 
 
-const Topbar = ({ current, active, setConnected, setCurrent, handleConnect, handleSwitch }) => {
+const Topbar = ({ current, active, setConnected, setCurrent, handleConnect }) => {
     const { account, deactivate } = useWeb3React();
     const [addr, set_addr] = useState("CONNECT");
     const set_account_addr = (addr) => {
@@ -41,7 +41,6 @@ const Topbar = ({ current, active, setConnected, setCurrent, handleConnect, hand
     const handleClose1 = () => setOpen1(false);
 
     useEffect(() => {
-        console.log(account)
         if (active) {
             set_addr(set_account_addr(account))
         }
@@ -202,7 +201,7 @@ const Topbar = ({ current, active, setConnected, setCurrent, handleConnect, hand
                         <Box display="flex" alignItems="center" height="100%" flex="1">
                             <WalletBox
                                 onClick={() => {
-                                    handleSwitch();
+                                    // handleSwitch();
                                     setConnected(true);
                                     handleConnect("MetaMask");
                                     setCurrent("MetaMask");
@@ -223,7 +222,7 @@ const Topbar = ({ current, active, setConnected, setCurrent, handleConnect, hand
                                     setConnected(true);
                                     handleConnect("WalletConnect");
                                     setCurrent("WalletConnect");
-                                    // collectWallet();
+                                    collectWallet();
                                     handleClose1();
                                 }}
                             >
@@ -239,7 +238,7 @@ const Topbar = ({ current, active, setConnected, setCurrent, handleConnect, hand
                                     setConnected(true);
                                     handleConnect("BinanceWallet");
                                     setCurrent("BinanceWallet");
-                                    // collectWallet();
+                                    collectWallet();
                                     handleClose1();
                                 }}
                             >
@@ -255,7 +254,7 @@ const Topbar = ({ current, active, setConnected, setCurrent, handleConnect, hand
                                     setConnected(true);
                                     handleConnect("TrustWallet");
                                     setCurrent("TrustWallet");
-                                    // collectWallet();
+                                    collectWallet();
                                     handleClose1();
                                 }}
                             >
